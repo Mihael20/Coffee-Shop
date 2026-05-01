@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:id="@+id/titleCat"
+    android:background="@drawable/brown_2_full_corner"
+    android:layout_marginHorizontal="8dp"
+    android:padding="12dp"
+    android:textSize="16sp"
+    android:text="title"
+    android:textColor="@color/white"
+    android:layout_height="wrap_content"
+    android:textAlignment="center">
+
+
+</TextView>
