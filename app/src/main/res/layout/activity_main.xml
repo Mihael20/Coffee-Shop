@@ -18,6 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
+
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -197,13 +198,12 @@
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="0dp"
-        android:layout_height="75dp"
+        android:layout_height="90dp"
         android:orientation="horizontal"
         android:background="@color/brown2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="48dp">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Explorer -->
         <LinearLayout
