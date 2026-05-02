@@ -1,12 +1,15 @@
 package com.example.coffeeonlineshop.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coffeeonlineshop.R
+import com.example.coffeeonlineshop.activities.ItemsListActivity
 import com.example.coffeeonlineshop.databinding.ViewholderCategoryBinding
 import com.example.coffeeonlineshop.domain.CategoryModel
 
@@ -24,34 +27,38 @@ class CategoryAdapter(val items: MutableList<CategoryModel>) :
         parent: ViewGroup,
         viewType: Int
     ): ViewHolder {
-
         context = parent.context
-
         val binding = ViewholderCategoryBinding.inflate(
             LayoutInflater.from(context),
             parent,
             false
         )
-
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
         val item = items[position]
 
         holder.binding.titleCat.text = item.title
 
         holder.binding.root.setOnClickListener {
+            // use getAdapterPosition() instead of captured position
+            val adapterPosition = holder.bindingAdapterPosition
+            if (adapterPosition == RecyclerView.NO_ID.toInt()) return@setOnClickListener
+
             lastSelectedPosition = selectedPosition
-            selectedPosition = position
+            selectedPosition = adapterPosition
 
             notifyItemChanged(lastSelectedPosition)
             notifyItemChanged(selectedPosition)
 
-            // fixed Handler syntax
             Handler(Looper.getMainLooper()).postDelayed({
-
+                val currentItem = items[adapterPosition]
+                val intent = Intent(context, ItemsListActivity::class.java).apply {
+                    putExtra("title", currentItem.title)
+                    putExtra("id", currentItem.id.toString())
+                }
+                ContextCompat.startActivity(context, intent, null)
             }, 500)
         }
 
