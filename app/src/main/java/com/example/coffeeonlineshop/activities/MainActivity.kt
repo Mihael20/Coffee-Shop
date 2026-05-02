@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.coffeeonlineshop.adapters.CategoryAdapter
+import com.example.coffeeonlineshop.adapters.PopularAdapter
 import com.example.coffeeonlineshop.databinding.ActivityMainBinding
 import com.example.coffeeonlineshop.viewmodel.MainViewModel
 
@@ -26,6 +27,22 @@ class MainActivity : AppCompatActivity() {
 
         initBanner()
         initCategory()
+        initPopular()
+    }
+
+    private fun initPopular() {
+        binding.apply {
+            progressBarPopular.visibility = View.VISIBLE
+            viewModel.loadPopular().observeForever{
+                popularView.layoutManager = LinearLayoutManager(
+                    this@MainActivity,
+                    LinearLayoutManager.HORIZONTAL, false)
+                popularView.adapter = PopularAdapter(items = it)
+                progressBarPopular.visibility = View.GONE
+
+            }
+            viewModel.loadPopular()
+        }
     }
 
     private fun initCategory() {

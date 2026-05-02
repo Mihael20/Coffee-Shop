@@ -5,11 +5,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/darkBrown"
-    tools:context=".activities.SplashActivity">
+    android:background="@color/darkBrown">
 
     <!-- Top Bar -->
-
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="0dp"
@@ -44,7 +42,7 @@
             app:srcCompat="@drawable/bell_icon" />
     </LinearLayout>
 
-    <!-- Search Bar -->
+    <!-- Search -->
     <LinearLayout
         android:id="@+id/searchBar"
         android:layout_width="0dp"
@@ -65,8 +63,7 @@
             android:textColorHint="@color/white"
             android:drawableStart="@drawable/search_icon"
             android:drawablePadding="8dp"
-            android:padding="8dp"
-            android:inputType="text" />
+            android:padding="8dp"/>
 
         <ImageView
             android:layout_width="50dp"
@@ -74,7 +71,7 @@
             android:layout_marginStart="8dp"
             android:background="@drawable/brown_full_corner_bg"
             android:padding="12dp"
-            app:srcCompat="@drawable/settings" />
+            app:srcCompat="@drawable/settings"/>
     </LinearLayout>
 
     <!-- Banner -->
@@ -84,136 +81,114 @@
         android:layout_height="180dp"
         android:layout_margin="16dp"
         android:scaleType="centerCrop"
-        app:shapeAppearanceOverlay="@style/cornerImage"
         app:layout_constraintTop_toBottomOf="@id/searchBar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Image INSIDE banner -->
+    <ImageView
+        android:id="@+id/imageView7"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="@id/banner"
+        app:layout_constraintBottom_toBottomOf="@id/banner"
+        app:layout_constraintStart_toStartOf="@id/banner"
+        app:layout_constraintEnd_toEndOf="@id/banner"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <!-- Banner Progress -->
+    <!-- Banner Loader -->
     <ProgressBar
         android:id="@+id/progressBarBanner"
-        style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:indeterminateTint="@color/orange"
         app:layout_constraintTop_toTopOf="@id/banner"
         app:layout_constraintBottom_toBottomOf="@id/banner"
         app:layout_constraintStart_toStartOf="@id/banner"
-        app:layout_constraintEnd_toEndOf="@id/banner" />
+        app:layout_constraintEnd_toEndOf="@id/banner"/>
 
-    <!-- Category Title -->
+    <!-- Category Label -->
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="0dp"
+        android:id="@+id/textCategory"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:text="Category"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_margin="16dp"
-
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintTop_toBottomOf="@id/banner"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
-    <!-- Progress + Text (CENTERED) -->
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:id="@+id/progressContainer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/textView3"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-    </LinearLayout>
-
-    <!-- RecyclerView -->
-
+    <!-- Category List -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categoryView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/textCategory"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressContainer"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- Progress INSIDE categoryView -->
     <ProgressBar
         android:id="@+id/progressCategory"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="49dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="84dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:indeterminateTint="@color/orange"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/categoryView"
+        app:layout_constraintBottom_toBottomOf="@id/categoryView"
+        app:layout_constraintStart_toStartOf="@id/categoryView"
+        app:layout_constraintEnd_toEndOf="@id/categoryView"/>
+
+    <!-- Popular Label -->
+    <TextView
+        android:id="@+id/textPopular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Popular Coffees"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/categoryView"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/textSeeAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="See all"
+        android:textColor="@color/white"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toTopOf="@id/textPopular"
+        app:layout_constraintBottom_toBottomOf="@id/textPopular"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Popular List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/popularView"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="8dp"
+        app:layout_constraintTop_toBottomOf="@id/textPopular"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/progressContainer" />
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_weight="1"
-            android:text="Popular Coffees"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/banner" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="See all" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/categoryView"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_margin="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/progressContainer"
-                    app:layout_constraintVertical_bias="1.0" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
-    </LinearLayout>
+    <!-- Progress INSIDE popularView -->
+    <ProgressBar
+        android:id="@+id/progressBarPopular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/orange"
+        app:layout_constraintTop_toTopOf="@id/popularView"
+        app:layout_constraintBottom_toBottomOf="@id/popularView"
+        app:layout_constraintStart_toStartOf="@id/popularView"
+        app:layout_constraintEnd_toEndOf="@id/popularView"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
