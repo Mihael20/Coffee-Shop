@@ -1,11 +1,13 @@
 package com.example.coffeeonlineshop.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.example.coffeeonlineshop.activities.DetailActivity
 import com.example.coffeeonlineshop.databinding.ViewholderPopularBinding
 import com.example.coffeeonlineshop.domain.ItemsModel
 
@@ -42,6 +44,13 @@ class PopularAdapter(private val items: MutableList<ItemsModel>) :
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .centerCrop()
                 .into(holder.binding.pic)
+
+            holder.itemView.setOnClickListener {
+                val intent = Intent(context, DetailActivity::class.java)
+                intent.putExtra("object", items[position])
+                context.startActivity(intent)
+            }
+
         } else {
             holder.binding.pic.setImageResource(android.R.color.transparent)
         }
