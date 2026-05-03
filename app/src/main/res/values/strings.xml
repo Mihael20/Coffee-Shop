@@ -12,4 +12,6 @@
     <string name="qty">Qty.</string>
     <string name="add_to_cart">Add to Cart</string>
     <string name="description">Description</string>
+    <string name="enter_your_descount_code">Enter your Descount Code</string>
+    <string name="procced_to_checkout">Procced to Checkout</string>
 </resources>
