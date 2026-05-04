@@ -6,7 +6,7 @@ import com.example.coffeeonlineshop.domain.ItemsModel
 
 class ManagmentCart(val context: Context) {
 
-    private val tinyDB = TinyDB(context)
+    private val room = Room(context)
 
     fun insertItems(item: ItemsModel) {
         var listItem = getListCart()
@@ -18,12 +18,12 @@ class ManagmentCart(val context: Context) {
         } else {
             listItem.add(item)
         }
-        tinyDB.putListObject("CartList", listItem)
+        room.putListObject("CartList", listItem)
         Toast.makeText(context, "Added to your Cart", Toast.LENGTH_SHORT).show()
     }
 
     fun getListCart(): ArrayList<ItemsModel> {
-        return tinyDB.getListObject("CartList") ?: arrayListOf()
+        return room.getListObject("CartList") ?: arrayListOf()
     }
 
     fun minusItem(listItems: ArrayList<ItemsModel>, position: Int, listener: ChangeNumberItemsListener) {
@@ -32,19 +32,19 @@ class ManagmentCart(val context: Context) {
         } else {
             listItems[position].numberInCart--
         }
-        tinyDB.putListObject("CartList", listItems)
+        room.putListObject("CartList", listItems)
         listener.onChanged()
     }
 
     fun removeItem(listItems: ArrayList<ItemsModel>, position: Int, listener: ChangeNumberItemsListener) {
         listItems.removeAt(position)
-        tinyDB.putListObject("CartList", listItems)
+        room.putListObject("CartList", listItems)
         listener.onChanged()
     }
 
     fun plusItem(listItems: ArrayList<ItemsModel>, position: Int, listener: ChangeNumberItemsListener) {
         listItems[position].numberInCart++
-        tinyDB.putListObject("CartList", listItems)
+        room.putListObject("CartList", listItems)
         listener.onChanged()
     }
 

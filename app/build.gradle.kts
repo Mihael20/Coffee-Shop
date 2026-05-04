@@ -5,11 +5,7 @@ plugins {
 
 android {
     namespace = "com.example.coffeeonlineshop"
-    compileSdk {
-        version = release(36) {
-            minorApiLevel = 1
-        }
-    }
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.example.coffeeonlineshop"
@@ -52,4 +48,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     implementation("com.github.bumptech.glide:glide:5.0.5")
     implementation("com.google.code.gson:gson:2.13.2")
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    annotationProcessor("androidx.room:room-compiler:2.7.1")
 }
