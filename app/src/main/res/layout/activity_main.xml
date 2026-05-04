@@ -230,27 +230,28 @@
     </LinearLayout>
 
     <!-- Cart -->
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center">
+        <LinearLayout
+            android:id="@+id/cartBtn"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="22dp"
-            android:layout_height="22dp"
-            app:srcCompat="@drawable/btn_2"
-            app:tint="@color/white" />
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                app:srcCompat="@drawable/btn_2"
+                app:tint="@color/white" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:text="Cart"
-            android:textSize="11sp"
-            android:textColor="@color/white" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:text="Cart"
+                android:textColor="@color/white"
+                android:textSize="11sp" />
+        </LinearLayout>
 
     <!-- Wishlist -->
     <LinearLayout
