@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Кафе Онлајн Продавница</string>
+    <string name="explorer">Истражи</string>
+    <string name="cart">Кошница</string>
+    <string name="wishlist">Омилени</string>
+    <string name="my_order">Мои Нарачки</string>
+    <string name="profile">Профил</string>
+    <string name="search_anything">Пребарај нешто</string>
+    <string name="category">Категорија</string>
+    <string name="popular_coffees">Популарни Кафиња</string>
+    <string name="see_all">Види ги сите</string>
+    <string name="coffee_order_time">Работно време 8:00 - 15:00</string>
+    <string name="buy_one_get_one">Купи едно, добиј едно бесплатно</string>
+    <string name="order_now">Нарачај сега</string>
+    <string name="back">Назад</string>
+    <string name="coffee_size">Големина на кафе</string>
+    <string name="small">Мало</string>
+    <string name="medium">Средно</string>
+    <string name="large">Големо</string>
+    <string name="qty">Кол.</string>
+    <string name="add_to_cart">Додај во кошница</string>
+    <string name="description">Опис</string>
+    <string name="rating">Оцена</string>
+    <string name="price">Цена</string>
+    <string name="enter_your_descount_code">Внеси код за попуст</string>
+    <string name="procced_to_checkout">Продолжи кон плаќање</string>
+    <string name="total_fee">Вкупна цена</string>
+    <string name="delivery">Достава</string>
+    <string name="tax">Данок</string>
+    <string name="total">Вкупно</string>
+    <string name="added_to_cart">Додадено во кошницата</string>
+    <string name="start">Започни</string>
+    <string name="coffee_shop">Кафе\nПродавница</string>
+</resources>

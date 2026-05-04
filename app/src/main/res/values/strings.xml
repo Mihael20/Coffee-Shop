@@ -1,9 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Coffee Online Shop</string>
+    <string name="explorer">Explorer</string>
+    <string name="cart">Cart</string>
     <string name="wishlist">WishList</string>
     <string name="my_order">My Order</string>
     <string name="profile">Profile</string>
     <string name="search_anything">Search Anything</string>
+    <string name="category">Category</string>
+    <string name="popular_coffees">Popular Coffees</string>
+    <string name="see_all">See all</string>
+    <string name="coffee_order_time">Coffee Order Time 8:00 am - 3:00 pm</string>
+    <string name="buy_one_get_one">Buy one, Get one for Free</string>
+    <string name="order_now">Order Now</string>
     <string name="back">Back</string>
     <string name="coffee_size">Coffee Size</string>
     <string name="small">Small</string>
@@ -12,6 +21,15 @@
     <string name="qty">Qty.</string>
     <string name="add_to_cart">Add to Cart</string>
     <string name="description">Description</string>
-    <string name="enter_your_descount_code">Enter your Descount Code</string>
-    <string name="procced_to_checkout">Procced to Checkout</string>
+    <string name="rating">Rating</string>
+    <string name="price">Price</string>
+    <string name="enter_your_descount_code">Enter your Discount Code</string>
+    <string name="procced_to_checkout">Proceed to Checkout</string>
+    <string name="total_fee">Total Fee</string>
+    <string name="delivery">Delivery</string>
+    <string name="tax">Tax</string>
+    <string name="total">Total</string>
+    <string name="added_to_cart">Added to your Cart</string>
+    <string name="start">Start</string>
+    <string name="coffee_shop">Coffee\nShop</string>
 </resources>
