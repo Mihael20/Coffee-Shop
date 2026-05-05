@@ -52,6 +52,7 @@ class ProfileActivity : AppCompatActivity() {
                             .transform(CircleCrop())
                             .into(profileIcon)
                     }
+
                     else -> {
                         nameTxt.text = user.displayName
                             ?: user.email?.substringBefore("@")
@@ -72,7 +73,8 @@ class ProfileActivity : AppCompatActivity() {
                             val fbUid = user.providerData
                                 .find { it.providerId == "facebook.com" }?.uid
                             if (fbUid != null) {
-                                val fbPhotoUrl = "https://graph.facebook.com/$fbUid/picture?type=large"
+                                val fbPhotoUrl =
+                                    "https://graph.facebook.com/$fbUid/picture?type=large"
                                 Glide.with(this@ProfileActivity)
                                     .load(fbPhotoUrl)
                                     .transform(CircleCrop())
@@ -140,13 +142,17 @@ class ProfileActivity : AppCompatActivity() {
                     .setPositiveButton("Delete") { _, _ ->
                         auth.currentUser?.delete()
                             ?.addOnSuccessListener {
-                                Toast.makeText(this@ProfileActivity,
-                                    "Account deleted", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this@ProfileActivity,
+                                    "Account deleted", Toast.LENGTH_SHORT
+                                ).show()
                                 goToLogin()
                             }
                             ?.addOnFailureListener {
-                                Toast.makeText(this@ProfileActivity,
-                                    "Failed: ${it.message}", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(
+                                    this@ProfileActivity,
+                                    "Failed: ${it.message}", Toast.LENGTH_SHORT
+                                ).show()
                             }
                     }
                     .setNegativeButton("Cancel", null)
@@ -158,7 +164,21 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun goToLogin() {
-        startActivity(Intent(this, LoginActivity::class.java))
-        finishAffinity()
+        // Исчисти го Google Sign In
+        val gso = com.google.android.gms.auth.api.signin.GoogleSignInOptions
+            .Builder(com.google.android.gms.auth.api.signin.GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .build()
+        val googleSignInClient = com.google.android.gms.auth.api.signin.GoogleSignIn
+            .getClient(this, gso)
+        googleSignInClient.signOut().addOnCompleteListener {
+            // Исчисти го Facebook логин
+            com.facebook.login.LoginManager.getInstance().logOut()
+            // Исчисти го Firebase
+            auth.signOut()
+            val intent = Intent(this, LoginActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
     }
 }

@@ -123,9 +123,19 @@ class LoginActivity : AppCompatActivity() {
                 }
                 auth.signInWithEmailAndPassword(email, password)
                     .addOnSuccessListener { goToMain() }
-                    .addOnFailureListener {
-                        Toast.makeText(this@LoginActivity,
-                            "Login failed: ${it.message}", Toast.LENGTH_SHORT).show()
+                    .addOnFailureListener { exception ->
+                        val message = when {
+                            exception.message?.contains("no user record") == true ->
+                                "Account not found. Please register first."
+                            exception.message?.contains("password is invalid") == true ->
+                                "Wrong password. Try again."
+                            exception.message?.contains("deleted") == true ->
+                                "This account has been deleted."
+                            exception.message?.contains("badly formatted") == true ->
+                                "Invalid email format."
+                            else -> "Login failed: ${exception.message}"
+                        }
+                        Toast.makeText(this@LoginActivity, message, Toast.LENGTH_SHORT).show()
                     }
             }
 
@@ -137,11 +147,22 @@ class LoginActivity : AppCompatActivity() {
                         "Please fill all fields", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
+                if (password.length < 6) {
+                    Toast.makeText(this@LoginActivity,
+                        "Password must be at least 6 characters", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
                 auth.createUserWithEmailAndPassword(email, password)
                     .addOnSuccessListener { goToMain() }
-                    .addOnFailureListener {
-                        Toast.makeText(this@LoginActivity,
-                            "Register failed: ${it.message}", Toast.LENGTH_SHORT).show()
+                    .addOnFailureListener { exception ->
+                        val message = when {
+                            exception.message?.contains("already in use") == true ->
+                                "Email already registered. Try logging in."
+                            exception.message?.contains("badly formatted") == true ->
+                                "Invalid email format."
+                            else -> "Register failed: ${exception.message}"
+                        }
+                        Toast.makeText(this@LoginActivity, message, Toast.LENGTH_SHORT).show()
                     }
             }
 
@@ -169,7 +190,6 @@ class LoginActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         auth.signInWithCredential(credential)
