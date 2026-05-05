@@ -16,12 +16,15 @@ import com.example.coffeeonlineshop.adapters.CategoryAdapter
 import com.example.coffeeonlineshop.adapters.PopularAdapter
 import com.example.coffeeonlineshop.databinding.ActivityMainBinding
 import com.example.coffeeonlineshop.viewmodel.MainViewModel
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.analytics.logEvent
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private val viewModel = MainViewModel()
+    private lateinit var analytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +32,12 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Firebase Analytics
+        analytics = FirebaseAnalytics.getInstance(this)
+        analytics.logEvent(FirebaseAnalytics.Event.APP_OPEN) {
+            param(FirebaseAnalytics.Param.METHOD, "login")
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.bottomBar) { view, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -67,7 +76,6 @@ class MainActivity : AppCompatActivity() {
                         .error(R.drawable.profile)
                         .into(imageView)
                 } else {
-                    // Facebook слика
                     val fbUid = user.providerData
                         .find { it.providerId == "facebook.com" }?.uid
                     if (fbUid != null) {
@@ -94,6 +102,13 @@ class MainActivity : AppCompatActivity() {
         }
         binding.profileBtn.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
+
+            // Лог настан кога корисникот ќе влезе на профил
+            analytics.logEvent("profile_opened") {
+                param("user_type",
+                    if (FirebaseAuth.getInstance().currentUser?.isAnonymous == true)
+                        "guest" else "registered")
+            }
         }
     }
 
@@ -107,6 +122,11 @@ class MainActivity : AppCompatActivity() {
                 )
                 popularView.adapter = PopularAdapter(items = it)
                 progressBarPopular.visibility = View.GONE
+
+                // Лог настан за популарни кафиња
+                analytics.logEvent("popular_coffees_loaded") {
+                    param("count", it.size.toLong())
+                }
             }
         }
     }
