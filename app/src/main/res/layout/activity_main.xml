@@ -25,7 +25,6 @@
             android:scaleType="centerCrop"
             app:srcCompat="@drawable/profile" />
 
-        <!-- Додадов userNameTxt -->
         <TextView
             android:id="@+id/userNameTxt"
             android:layout_width="0dp"
@@ -38,7 +37,9 @@
             android:layout_marginStart="8dp"
             android:gravity="center_vertical" />
 
+        <!-- Додадов bellBtn -->
         <ImageView
+            android:id="@+id/bellBtn"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:padding="10dp"
@@ -302,7 +303,7 @@
                 android:textColor="@color/white" />
         </LinearLayout>
 
-        <!-- Profile — Додадов profileBtn -->
+        <!-- Profile -->
         <LinearLayout
             android:id="@+id/profileBtn"
             android:layout_width="0dp"

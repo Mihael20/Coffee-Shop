@@ -25,9 +25,12 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
+            <!-- Додадов userProfileImg -->
             <ImageView
+                android:id="@+id/userProfileImg"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:scaleType="centerCrop"
                 app:srcCompat="@drawable/profile" />
 
             <TextView
@@ -42,7 +45,9 @@
                 android:layout_marginStart="12dp"
                 android:gravity="center_vertical" />
 
+            <!-- Додадов bellBtn -->
             <ImageView
+                android:id="@+id/bellBtn"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:padding="10dp"

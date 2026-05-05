@@ -19,13 +19,10 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var binding: ActivityProfileBinding
     private lateinit var auth: FirebaseAuth
 
-    // Image picker
     private val imagePickerLauncher = registerForActivityResult(
         ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
-        uri?.let {
-            uploadProfileImage(it)
-        }
+        uri?.let { uploadProfileImage(it) }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,14 +49,12 @@ class ProfileActivity : AppCompatActivity() {
                             .transform(CircleCrop())
                             .into(profileIcon)
                     }
-
                     else -> {
                         nameTxt.text = user.displayName
                             ?: user.email?.substringBefore("@")
                                     ?: "User"
                         emailTxt.text = user.email ?: ""
 
-                        // Земи слика — работи за Google и Facebook
                         val photoUrl = user.photoUrl?.toString()
                         if (!photoUrl.isNullOrEmpty()) {
                             Glide.with(this@ProfileActivity)
@@ -69,14 +64,11 @@ class ProfileActivity : AppCompatActivity() {
                                 .error(R.drawable.profile)
                                 .into(profileIcon)
                         } else {
-                            // Facebook слика преку Graph API
                             val fbUid = user.providerData
                                 .find { it.providerId == "facebook.com" }?.uid
                             if (fbUid != null) {
-                                val fbPhotoUrl =
-                                    "https://graph.facebook.com/$fbUid/picture?type=large"
                                 Glide.with(this@ProfileActivity)
-                                    .load(fbPhotoUrl)
+                                    .load("https://graph.facebook.com/$fbUid/picture?type=large")
                                     .transform(CircleCrop())
                                     .placeholder(R.drawable.profile)
                                     .into(profileIcon)
@@ -101,14 +93,12 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun uploadProfileImage(uri: Uri) {
         val user = auth.currentUser ?: return
-
         val profileUpdates = UserProfileChangeRequest.Builder()
             .setPhotoUri(uri)
             .build()
 
         user.updateProfile(profileUpdates)
             .addOnSuccessListener {
-                // Прикажи ја новата слика
                 Glide.with(this)
                     .load(uri)
                     .transform(CircleCrop())
@@ -128,7 +118,6 @@ class ProfileActivity : AppCompatActivity() {
                     .setTitle("Logout")
                     .setMessage("Are you sure you want to logout?")
                     .setPositiveButton("Yes") { _, _ ->
-                        auth.signOut()
                         goToLogin()
                     }
                     .setNegativeButton("No", null)
@@ -142,17 +131,13 @@ class ProfileActivity : AppCompatActivity() {
                     .setPositiveButton("Delete") { _, _ ->
                         auth.currentUser?.delete()
                             ?.addOnSuccessListener {
-                                Toast.makeText(
-                                    this@ProfileActivity,
-                                    "Account deleted", Toast.LENGTH_SHORT
-                                ).show()
+                                Toast.makeText(this@ProfileActivity,
+                                    "Account deleted", Toast.LENGTH_SHORT).show()
                                 goToLogin()
                             }
                             ?.addOnFailureListener {
-                                Toast.makeText(
-                                    this@ProfileActivity,
-                                    "Failed: ${it.message}", Toast.LENGTH_SHORT
-                                ).show()
+                                Toast.makeText(this@ProfileActivity,
+                                    "Failed: ${it.message}", Toast.LENGTH_SHORT).show()
                             }
                     }
                     .setNegativeButton("Cancel", null)
@@ -164,21 +149,30 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun goToLogin() {
-        // Исчисти го Google Sign In
-        val gso = com.google.android.gms.auth.api.signin.GoogleSignInOptions
-            .Builder(com.google.android.gms.auth.api.signin.GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .build()
-        val googleSignInClient = com.google.android.gms.auth.api.signin.GoogleSignIn
-            .getClient(this, gso)
-        googleSignInClient.signOut().addOnCompleteListener {
-            // Исчисти го Facebook логин
+        try {
+            // Исчисти Facebook прво — брзо
             com.facebook.login.LoginManager.getInstance().logOut()
-            // Исчисти го Firebase
+            // Исчисти Firebase
             auth.signOut()
-            val intent = Intent(this, LoginActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
-            finish()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        // Оди на Login веднаш
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
+
+        // Google signOut во позадина
+        try {
+            val gso = com.google.android.gms.auth.api.signin.GoogleSignInOptions
+                .Builder(com.google.android.gms.auth.api.signin.GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .build()
+            com.google.android.gms.auth.api.signin.GoogleSignIn
+                .getClient(this, gso).signOut()
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 }
