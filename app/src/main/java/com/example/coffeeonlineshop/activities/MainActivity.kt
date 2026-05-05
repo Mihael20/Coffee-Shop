@@ -10,10 +10,13 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CircleCrop
+import com.example.coffeeonlineshop.R
 import com.example.coffeeonlineshop.adapters.CategoryAdapter
 import com.example.coffeeonlineshop.adapters.PopularAdapter
 import com.example.coffeeonlineshop.databinding.ActivityMainBinding
 import com.example.coffeeonlineshop.viewmodel.MainViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -36,15 +39,61 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
+        loadUserInfo()
         initBanner()
         initCategory()
         initPopular()
         initBottomMenu()
     }
 
+    private fun loadUserInfo() {
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            val name = when {
+                user.isAnonymous -> "Guest"
+                !user.displayName.isNullOrEmpty() -> user.displayName!!
+                !user.email.isNullOrEmpty() -> user.email!!.substringBefore("@")
+                else -> "User"
+            }
+            binding.userNameTxt.text = name
+
+            val photoUrl = user.photoUrl?.toString()
+            binding.userProfileImg?.let { imageView ->
+                if (!photoUrl.isNullOrEmpty()) {
+                    Glide.with(this)
+                        .load(photoUrl)
+                        .transform(CircleCrop())
+                        .placeholder(R.drawable.profile)
+                        .error(R.drawable.profile)
+                        .into(imageView)
+                } else {
+                    // Facebook слика
+                    val fbUid = user.providerData
+                        .find { it.providerId == "facebook.com" }?.uid
+                    if (fbUid != null) {
+                        val fbPhotoUrl = "https://graph.facebook.com/$fbUid/picture?type=large"
+                        Glide.with(this)
+                            .load(fbPhotoUrl)
+                            .transform(CircleCrop())
+                            .placeholder(R.drawable.profile)
+                            .into(imageView)
+                    } else {
+                        Glide.with(this)
+                            .load(R.drawable.profile)
+                            .transform(CircleCrop())
+                            .into(imageView)
+                    }
+                }
+            }
+        }
+    }
+
     private fun initBottomMenu() {
         binding.cartBtn.setOnClickListener {
             startActivity(Intent(this, CartActivity::class.java))
+        }
+        binding.profileBtn.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
         }
     }
 

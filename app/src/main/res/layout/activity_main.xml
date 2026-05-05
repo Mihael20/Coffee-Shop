@@ -19,11 +19,15 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
+            android:id="@+id/userProfileImg"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:scaleType="centerCrop"
             app:srcCompat="@drawable/profile" />
 
+        <!-- Додадов userNameTxt -->
         <TextView
+            android:id="@+id/userNameTxt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -298,8 +302,9 @@
                 android:textColor="@color/white" />
         </LinearLayout>
 
-        <!-- Profile -->
+        <!-- Profile — Додадов profileBtn -->
         <LinearLayout
+            android:id="@+id/profileBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

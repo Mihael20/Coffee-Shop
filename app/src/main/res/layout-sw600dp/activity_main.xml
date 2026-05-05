@@ -23,6 +23,7 @@
             app:srcCompat="@drawable/profile" />
 
         <TextView
+            android:id="@+id/userNameTxt"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -237,6 +238,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/profileBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

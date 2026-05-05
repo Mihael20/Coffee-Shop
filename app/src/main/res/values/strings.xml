@@ -32,4 +32,8 @@
     <string name="added_to_cart">Added to your Cart</string>
     <string name="start">Start</string>
     <string name="coffee_shop">Coffee\nShop</string>
+    <string name="default_web_client_id">ЗАЛЕПИ_ГО_ОВДЕ_WEB_CLIENT_ID</string>
+    <string name="facebook_app_id">1303571171891349</string>
+    <string name="fb_login_protocol_scheme">fb1303571171891349</string>
+    <string name="facebook_client_token">dee1de8a2c2934138acc55d8e99b1e34</string>
 </resources>

@@ -2,14 +2,19 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.CoffeeOnlineShop" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
     <style name="Theme.CoffeeOnlineShop" parent="Base.Theme.CoffeeOnlineShop" />
-    <style name = "cornerImage">
-        <item name ="cornerFamily">rounded</item>
-   <item name="cornerSize">15dp</item>
+
+    <!-- Login тема со тастатура -->
+    <style name="Theme.CoffeeOnlineShop.Login" parent="Theme.CoffeeOnlineShop">
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
-
+    <style name="cornerImage">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">15dp</item>
+    </style>
 </resources>
