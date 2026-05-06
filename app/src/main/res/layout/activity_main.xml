@@ -70,6 +70,9 @@
             android:textColor="@color/white"
             android:imeOptions="actionSearch"
             android:inputType="text"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:clickable="true"
             android:drawableStart="@drawable/search_icon"
             android:drawablePadding="8dp"
             android:padding="8dp"/>

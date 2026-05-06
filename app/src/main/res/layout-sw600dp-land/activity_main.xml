@@ -22,7 +22,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="16dp">
+            android:paddingTop="32dp"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="8dp">
 
             <ImageView
                 android:id="@+id/userProfileImg"
@@ -61,18 +63,26 @@
             android:paddingBottom="8dp">
 
             <EditText
+                android:id="@+id/searchEdt"
                 android:layout_width="0dp"
                 android:layout_height="52dp"
                 android:layout_weight="1"
                 android:background="@drawable/brown_2_full_corner"
                 android:hint="@string/search_anything"
                 android:textColorHint="@color/white"
+                android:textColor="@color/white"
                 android:textSize="15sp"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:clickable="true"
                 android:drawableStart="@drawable/search_icon"
                 android:drawablePadding="8dp"
                 android:padding="8dp"/>
 
             <ImageView
+                android:id="@+id/filterBtn"
                 android:layout_width="52dp"
                 android:layout_height="52dp"
                 android:layout_marginStart="8dp"
@@ -155,7 +165,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/see_all"
                 android:textColor="@color/white"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true"/>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -191,6 +203,7 @@
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                     android:text="@string/history" android:textColor="@color/white" android:textSize="12sp"/>
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/cartBtn"
                 android:layout_width="0dp"
