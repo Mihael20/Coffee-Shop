@@ -11,8 +11,8 @@
     <string name="category">Категорија</string>
     <string name="popular_coffees">Популарни Кафиња</string>
     <string name="see_all">Види ги сите</string>
-    <string name="coffee_order_time">Coffee Order Time 8:00 am - 3:00 pm</string>
-    <string name="buy_one_get_one">Buy one, Get one for Free</string>
+    <string name="coffee_order_time">Кафе порачка Време 8:00 am - 3:00 pm</string>
+    <string name="buy_one_get_one">Купиј едно, Доби уште едно гратис</string>
     <string name="order_now">Order Now</string>
     <string name="back">Назад</string>
     <string name="coffee_size">Големина на кафе</string>
@@ -36,4 +36,7 @@
     <string name="facebook_app_id">1303571171891349</string>
     <string name="fb_login_protocol_scheme">fb1303571171891349</string>
     <string name="facebook_client_token">dee1de8a2c2934138acc55d8e99b1e34</string>
+    <string name="delete_account">Избриши акаунт</string>
+    <string name="name">Ime</string>
+    <string name="logout">Одјави се</string>
 </resources>
