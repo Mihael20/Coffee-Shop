@@ -87,6 +87,10 @@
             </intent-filter>
         </service>
 
+        <activity
+            android:name=".activities.OrderActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

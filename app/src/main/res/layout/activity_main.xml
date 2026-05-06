@@ -37,7 +37,6 @@
             android:layout_marginStart="8dp"
             android:gravity="center_vertical" />
 
-        <!-- Додадов bellBtn -->
         <ImageView
             android:id="@+id/bellBtn"
             android:layout_width="40dp"
@@ -282,6 +281,7 @@
 
         <!-- My Order -->
         <LinearLayout
+            android:id="@+id/myOrderBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

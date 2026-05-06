@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/darkBrown">
 
-    <!-- Top Bar -->
     <LinearLayout
         android:id="@+id/topBar"
         android:layout_width="0dp"
@@ -45,7 +44,6 @@
             app:srcCompat="@drawable/bell_icon" />
     </LinearLayout>
 
-    <!-- Search -->
     <LinearLayout
         android:id="@+id/searchBar"
         android:layout_width="0dp"
@@ -78,7 +76,6 @@
             app:srcCompat="@drawable/settings"/>
     </LinearLayout>
 
-    <!-- Banner -->
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/banner"
         android:layout_width="0dp"
@@ -99,7 +96,6 @@
         app:layout_constraintStart_toStartOf="@id/banner"
         app:layout_constraintEnd_toEndOf="@id/banner"/>
 
-    <!-- Category -->
     <TextView
         android:id="@+id/textCategory"
         android:layout_width="wrap_content"
@@ -133,7 +129,6 @@
         app:layout_constraintStart_toStartOf="@id/categoryView"
         app:layout_constraintEnd_toEndOf="@id/categoryView"/>
 
-    <!-- Popular -->
     <TextView
         android:id="@+id/textPopular"
         android:layout_width="wrap_content"
@@ -180,7 +175,6 @@
         app:layout_constraintStart_toStartOf="@id/popularView"
         app:layout_constraintEnd_toEndOf="@id/popularView"/>
 
-    <!-- Bottom Bar -->
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="0dp"
@@ -229,6 +223,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/myOrderBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

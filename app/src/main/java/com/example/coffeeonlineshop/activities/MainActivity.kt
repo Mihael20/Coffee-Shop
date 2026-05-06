@@ -178,19 +178,21 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.bellBtn.setOnClickListener {
-            // Прикажи порака на екран
             android.app.AlertDialog.Builder(this)
                 .setTitle("Coffee Shop ☕")
                 .setMessage("Нова промоција! Купи едно добиј едно бесплатно!")
                 .setPositiveButton("OK", null)
                 .show()
 
-            // Испрати notification истовремено
             showNotification(
                 id = 1,
                 title = "Coffee Shop",
                 message = "Нова промоција! Купи едно добиј едно бесплатно! ☕"
             )
+        }
+
+        binding.myOrderBtn.setOnClickListener {
+            startActivity(Intent(this, OrderActivity::class.java))
         }
     }
 

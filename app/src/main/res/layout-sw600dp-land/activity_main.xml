@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/darkBrown">
 
-    <!-- Left Column -->
     <LinearLayout
         android:id="@+id/leftColumn"
         android:layout_width="0dp"
@@ -25,7 +24,6 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
-            <!-- Додадов userProfileImg -->
             <ImageView
                 android:id="@+id/userProfileImg"
                 android:layout_width="48dp"
@@ -45,7 +43,6 @@
                 android:layout_marginStart="12dp"
                 android:gravity="center_vertical" />
 
-            <!-- Додадов bellBtn -->
             <ImageView
                 android:id="@+id/bellBtn"
                 android:layout_width="48dp"
@@ -125,7 +122,6 @@
 
     </LinearLayout>
 
-    <!-- Right Column -->
     <LinearLayout
         android:id="@+id/rightColumn"
         android:layout_width="0dp"
@@ -221,6 +217,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/myOrderBtn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"

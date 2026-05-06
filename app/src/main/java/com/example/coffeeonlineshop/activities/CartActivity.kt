@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coffeeonlineshop.Helper.ChangeNumberItemsListener
 import com.example.coffeeonlineshop.Helper.ManagmentCart
+import com.example.coffeeonlineshop.Repository.OrderRepository
 import com.example.coffeeonlineshop.adapters.CartAdapter
 import com.example.coffeeonlineshop.databinding.ActivityCartBinding
 
@@ -49,6 +50,21 @@ class CartActivity : AppCompatActivity() {
 
     private fun setVariable() {
         binding.backBtn.setOnClickListener { finish() }
+
+        binding.processBtn.setOnClickListener {
+            val orderRepo = OrderRepository()
+            orderRepo.saveOrder(
+                items = managmentCart.getListCart(),
+                totalPrice = managmentCart.getTotalFee()
+            )
+            android.app.AlertDialog.Builder(this)
+                .setTitle("Order Placed! ☕")
+                .setMessage("Your order has been placed successfully!")
+                .setPositiveButton("OK") { _, _ ->
+                    finish()
+                }
+                .show()
+        }
     }
 
     private fun calculateCart() {
