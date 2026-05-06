@@ -149,30 +149,27 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun goToLogin() {
-        try {
-            // Исчисти Facebook прво — брзо
-            com.facebook.login.LoginManager.getInstance().logOut()
-            // Исчисти Firebase
-            auth.signOut()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        // Прво исчисти Firebase — синхроно
+        auth.signOut()
 
-        // Оди на Login веднаш
+        // Потоа Facebook и Google во позадина
+        Thread {
+            try {
+                com.facebook.login.LoginManager.getInstance().logOut()
+                val gso = com.google.android.gms.auth.api.signin.GoogleSignInOptions
+                    .Builder(com.google.android.gms.auth.api.signin.GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .build()
+                com.google.android.gms.auth.api.signin.GoogleSignIn
+                    .getClient(this, gso).signOut()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }.start()
+
+        // Оди на Login
         val intent = Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
         finish()
-
-        // Google signOut во позадина
-        try {
-            val gso = com.google.android.gms.auth.api.signin.GoogleSignInOptions
-                .Builder(com.google.android.gms.auth.api.signin.GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .build()
-            com.google.android.gms.auth.api.signin.GoogleSignIn
-                .getClient(this, gso).signOut()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
     }
 }

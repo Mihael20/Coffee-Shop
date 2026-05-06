@@ -59,17 +59,22 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <EditText
+            android:id="@+id/searchEdt"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_weight="1"
             android:background="@drawable/brown_2_full_corner"
             android:hint="@string/search_anything"
             android:textColorHint="@color/white"
+            android:textColor="@color/white"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
             android:drawableStart="@drawable/search_icon"
             android:drawablePadding="8dp"
             android:padding="8dp"/>
 
         <ImageView
+            android:id="@+id/filterBtn"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="8dp"
@@ -169,6 +174,8 @@
         android:text="@string/see_all"
         android:textColor="@color/white"
         android:layout_marginEnd="16dp"
+        android:clickable="true"
+        android:focusable="true"
         app:layout_constraintTop_toTopOf="@id/textPopular"
         app:layout_constraintBottom_toBottomOf="@id/textPopular"
         app:layout_constraintEnd_toEndOf="parent"/>

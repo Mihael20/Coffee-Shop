@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -37,7 +38,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Провери дали е отворено од notification
         val notifTitle = intent.getStringExtra("notification_title")
         val notifMessage = intent.getStringExtra("notification_message")
         if (!notifTitle.isNullOrEmpty() && !notifMessage.isNullOrEmpty()) {
@@ -63,7 +63,6 @@ class MainActivity : AppCompatActivity() {
             android.util.Log.d("FCM", "Token: $token")
         }
 
-        // Notification при отворање
         showNotification(
             id = 2,
             title = "Coffee Shop",
@@ -193,6 +192,41 @@ class MainActivity : AppCompatActivity() {
 
         binding.myOrderBtn.setOnClickListener {
             startActivity(Intent(this, OrderActivity::class.java))
+        }
+
+        // Search — лупа копче во тастатурата
+        binding.searchEdt?.setOnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER &&
+                event.action == KeyEvent.ACTION_DOWN) {
+                val query = binding.searchEdt?.text.toString().trim()
+                if (query.isNotEmpty()) {
+                    val intent = Intent(this, SearchActivity::class.java)
+                    intent.putExtra("query", query)
+                    startActivity(intent)
+                }
+                true
+            } else false
+        }
+
+        // Search — портокаловото копче (filterBtn)
+        binding.filterBtn?.setOnClickListener {
+            val query = binding.searchEdt?.text.toString().trim()
+            if (query.isNotEmpty()) {
+                val intent = Intent(this, SearchActivity::class.java)
+                intent.putExtra("query", query)
+                startActivity(intent)
+            } else {
+                val intent = Intent(this, SearchActivity::class.java)
+                intent.putExtra("show_all", true)
+                startActivity(intent)
+            }
+        }
+
+        // See All функција
+        binding.textSeeAll.setOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java)
+            intent.putExtra("show_all", true)
+            startActivity(intent)
         }
     }
 
