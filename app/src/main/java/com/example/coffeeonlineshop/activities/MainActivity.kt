@@ -194,7 +194,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, OrderActivity::class.java))
         }
 
-        // Search — лупа копче во тастатурата
+        binding.wishlistBtn?.setOnClickListener {
+            startActivity(Intent(this, WishlistActivity::class.java))
+        }
+
+        // Search функција
         binding.searchEdt?.setOnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER &&
                 event.action == KeyEvent.ACTION_DOWN) {
@@ -208,7 +212,14 @@ class MainActivity : AppCompatActivity() {
             } else false
         }
 
-        // Search — портокаловото копче (filterBtn)
+        // See All функција
+        binding.textSeeAll.setOnClickListener {
+            val intent = Intent(this, SearchActivity::class.java)
+            intent.putExtra("show_all", true)
+            startActivity(intent)
+        }
+
+        // Filter копче
         binding.filterBtn?.setOnClickListener {
             val query = binding.searchEdt?.text.toString().trim()
             if (query.isNotEmpty()) {
@@ -220,13 +231,6 @@ class MainActivity : AppCompatActivity() {
                 intent.putExtra("show_all", true)
                 startActivity(intent)
             }
-        }
-
-        // See All функција
-        binding.textSeeAll.setOnClickListener {
-            val intent = Intent(this, SearchActivity::class.java)
-            intent.putExtra("show_all", true)
-            startActivity(intent)
         }
     }
 

@@ -60,6 +60,28 @@ class DetailActivity : AppCompatActivity() {
             priceTxt.text = "$" + item.price
             ratingTxt.text = item.rating.toString()
 
+            // Постави срце според wishlist статус
+            updateWishlistIcon()
+
+            // Срце копче
+            favBtn.setOnClickListener {
+                val added = WishlistActivity.toggleWishlist(this@DetailActivity, item)
+                updateWishlistIcon()
+                if (added) {
+                    android.widget.Toast.makeText(
+                        this@DetailActivity,
+                        "${item.title} added to favourites ❤️",
+                        android.widget.Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    android.widget.Toast.makeText(
+                        this@DetailActivity,
+                        "${item.title} removed from favourites",
+                        android.widget.Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+
             addToCartBtn.setOnClickListener {
                 item.numberInCart = Integer.valueOf(
                     numberInCartTxt.text.toString()
@@ -80,6 +102,14 @@ class DetailActivity : AppCompatActivity() {
                     item.numberInCart--
                 }
             }
+        }
+    }
+
+    private fun updateWishlistIcon() {
+        if (WishlistActivity.isInWishlist(this, item)) {
+            binding.favBtn.setImageResource(R.drawable.ic_heart_filled)
+        } else {
+            binding.favBtn.setImageResource(R.drawable.ic_heart_outline)
         }
     }
 }
