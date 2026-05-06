@@ -17,7 +17,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-class OrderActivity : AppCompatActivity() {
+class HistoryActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var emptyTxt: TextView
@@ -26,12 +26,12 @@ class OrderActivity : AppCompatActivity() {
     private lateinit var selectAllBtn: TextView
     private val auth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
-    private var orderAdapter: OrderAdapter? = null
+    private var orderAdapter: HistoryAdapter? = null
     private val orderIds = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_order)
+        setContentView(R.layout.activity_history)
 
         recyclerView = findViewById(R.id.orderRecyclerView)
         emptyTxt = findViewById(R.id.emptyTxt)
@@ -51,7 +51,7 @@ class OrderActivity : AppCompatActivity() {
             if (selected.isEmpty()) return@setOnClickListener
             AlertDialog.Builder(this)
                 .setTitle("Delete Selected")
-                .setMessage("Are you sure you want to delete selected orders?")
+                .setMessage("Are you sure?")
                 .setPositiveButton("Yes") { _, _ -> deleteOrders(selected) }
                 .setNegativeButton("No", null)
                 .show()
@@ -60,7 +60,7 @@ class OrderActivity : AppCompatActivity() {
         deleteAllBtn.setOnClickListener {
             AlertDialog.Builder(this)
                 .setTitle("Delete All")
-                .setMessage("Are you sure you want to delete all orders?")
+                .setMessage("Are you sure?")
                 .setPositiveButton("Yes") { _, _ -> deleteOrders(orderIds.toList()) }
                 .setNegativeButton("No", null)
                 .show()
@@ -96,7 +96,7 @@ class OrderActivity : AppCompatActivity() {
                     deleteSelectedBtn.visibility = View.VISIBLE
                     deleteAllBtn.visibility = View.VISIBLE
                     selectAllBtn.visibility = View.VISIBLE
-                    orderAdapter = OrderAdapter(orders, orderIds)
+                    orderAdapter = HistoryAdapter(orders, orderIds)
                     recyclerView.adapter = orderAdapter
                 }
             }
@@ -110,16 +110,10 @@ class OrderActivity : AppCompatActivity() {
         batch.commit().addOnSuccessListener { loadOrders() }
     }
 
-    private fun updateStatus(id: String, status: String) {
-        db.collection("orders").document(id)
-            .update("status", status)
-            .addOnSuccessListener { loadOrders() }
-    }
-
-    inner class OrderAdapter(
+    inner class HistoryAdapter(
         private val orders: List<Map<String, Any>>,
         private val ids: List<String>
-    ) : RecyclerView.Adapter<OrderAdapter.ViewHolder>() {
+    ) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
         private val selectedIds = mutableSetOf<String>()
 
@@ -137,13 +131,11 @@ class OrderActivity : AppCompatActivity() {
             val itemsTxt: TextView = view.findViewById(R.id.orderItemsTxt)
             val dateTxt: TextView = view.findViewById(R.id.orderDateTxt)
             val checkBox: CheckBox = view.findViewById(R.id.orderCheckBox)
-            val approvedBtn: TextView = view.findViewById(R.id.approvedBtn)
-            val canceledBtn: TextView = view.findViewById(R.id.canceledBtn)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view = LayoutInflater.from(parent.context)
-                .inflate(R.layout.viewholder_order, parent, false)
+                .inflate(R.layout.viewholder_history, parent, false)
             return ViewHolder(view)
         }
 
@@ -156,7 +148,6 @@ class OrderActivity : AppCompatActivity() {
             val status = order["status"] as? String ?: "pending"
             holder.statusTxt.text = "Status: $status"
 
-            // Боја на статус
             when (status) {
                 "approved" -> holder.statusTxt.setTextColor(
                     android.graphics.Color.parseColor("#4CAF50"))
@@ -183,23 +174,6 @@ class OrderActivity : AppCompatActivity() {
             holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) selectedIds.add(id)
                 else selectedIds.remove(id)
-            }
-
-            // Approved копче
-            holder.approvedBtn.setOnClickListener {
-                updateStatus(id, "approved")
-            }
-
-            // Canceled копче
-            holder.canceledBtn.setOnClickListener {
-                AlertDialog.Builder(holder.itemView.context)
-                    .setTitle("Cancel Order")
-                    .setMessage("Are you sure you want to cancel this order?")
-                    .setPositiveButton("Yes") { _, _ ->
-                        updateStatus(id, "canceled")
-                    }
-                    .setNegativeButton("No", null)
-                    .show()
             }
         }
 

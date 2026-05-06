@@ -186,6 +186,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
+            android:id="@+id/historyBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -194,7 +195,7 @@
             <ImageView android:layout_width="26dp" android:layout_height="26dp"
                 app:srcCompat="@drawable/btn_1" app:tint="@color/white"/>
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="@string/explorer" android:textColor="@color/white" android:textSize="13sp"/>
+                android:text="@string/history" android:textColor="@color/white" android:textSize="13sp"/>
         </LinearLayout>
 
         <LinearLayout

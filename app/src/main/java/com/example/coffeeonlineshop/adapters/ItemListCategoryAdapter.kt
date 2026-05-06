@@ -1,6 +1,5 @@
 package com.example.coffeeonlineshop.adapters
 
-import android.R
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -37,22 +36,22 @@ class ItemListCategoryAdapter(private val items: MutableList<ItemsModel>) :
         holder.binding.subtitleTxt.text = item.extra
         holder.binding.priceTxt.text = "$${item.price}"
 
-        // Load image safely
-        val imageUrl = item.picUrl.getOrNull(0)  // lowercase L
+        val imageUrl = item.picUrl.getOrNull(0)
         if (!imageUrl.isNullOrEmpty()) {
             Glide.with(context)
                 .load(imageUrl)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .centerCrop()
                 .into(holder.binding.pic)
-
-            holder.itemView.setOnClickListener {
-                val intent = Intent(context, DetailActivity::class.java)
-                intent.putExtra("object", items[position])
-                context.startActivity(intent)
-            }
         } else {
-            holder.binding.pic.setImageResource(R.color.transparent)
+            holder.binding.pic.setImageDrawable(null)
+        }
+
+        holder.itemView.setOnClickListener {
+            val intent = Intent(context, DetailActivity::class.java)
+            intent.putExtra("object", items[position])
+            context.startActivity(intent)
         }
     }
 

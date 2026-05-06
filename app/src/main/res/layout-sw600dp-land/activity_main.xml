@@ -180,6 +180,7 @@
             android:background="@color/brown2">
 
             <LinearLayout
+                android:id="@+id/historyBtn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -188,9 +189,8 @@
                 <ImageView android:layout_width="24dp" android:layout_height="24dp"
                     app:srcCompat="@drawable/btn_1" app:tint="@color/white"/>
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="@string/explorer" android:textColor="@color/white" android:textSize="12sp"/>
+                    android:text="@string/history" android:textColor="@color/white" android:textSize="12sp"/>
             </LinearLayout>
-
             <LinearLayout
                 android:id="@+id/cartBtn"
                 android:layout_width="0dp"

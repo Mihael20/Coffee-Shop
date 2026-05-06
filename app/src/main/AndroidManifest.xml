@@ -99,6 +99,10 @@
             android:name=".activities.WishlistActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".activities.HistoryActivity"
+            android:exported="false" />
+
     </application>
 
 

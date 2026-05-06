@@ -11,6 +11,35 @@ class MainRepository {
 
     private val firebaseDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
 
+    private fun parseItemsModel(snapshot: DataSnapshot): ItemsModel? {
+        return try {
+            val title = snapshot.child("title").getValue(String::class.java) ?: ""
+            val description = snapshot.child("description").getValue(String::class.java) ?: ""
+            val price = snapshot.child("price").getValue(Double::class.java) ?: 0.0
+            val rating = snapshot.child("rating").getValue(Double::class.java) ?: 0.0
+            val extra = snapshot.child("extra").getValue(String::class.java) ?: ""
+
+            // Чита picUrl и како низа и како објект
+            val picUrl = ArrayList<String>()
+            val picUrlSnapshot = snapshot.child("picUrl")
+            for (pic in picUrlSnapshot.children) {
+                val url = pic.getValue(String::class.java)
+                if (url != null) picUrl.add(url)
+            }
+
+            ItemsModel(
+                title = title,
+                description = description,
+                picUrl = picUrl,
+                price = price,
+                rating = rating,
+                extra = extra
+            )
+        } catch (e: Exception) {
+            null
+        }
+    }
+
     fun loadBanner(): LiveData<MutableList<BannerModel>> {
         val listData = MutableLiveData<MutableList<BannerModel>>()
         val ref: DatabaseReference = firebaseDatabase.getReference("Banner")
@@ -39,7 +68,7 @@ class MainRepository {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val list = mutableListOf<ItemsModel>()
                 for (childSnapshot in snapshot.children) {
-                    val item = childSnapshot.getValue(ItemsModel::class.java)
+                    val item = parseItemsModel(childSnapshot)
                     if (item != null) list.add(item)
                 }
                 itemsLiveData.value = list
@@ -77,7 +106,7 @@ class MainRepository {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val list = mutableListOf<ItemsModel>()
                 for (childSnapshot in snapshot.children) {
-                    val item = childSnapshot.getValue(ItemsModel::class.java)
+                    val item = parseItemsModel(childSnapshot)
                     if (item != null) list.add(item)
                 }
                 listData.value = list

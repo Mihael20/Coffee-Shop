@@ -13,7 +13,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginHorizontal="16dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -215,8 +216,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Explorer -->
+        <!-- History -->
         <LinearLayout
+            android:id="@+id/historyBtn"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -224,7 +226,6 @@
             android:gravity="center">
 
             <ImageView
-                android:id="@+id/imageView2"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 app:srcCompat="@drawable/btn_1"
@@ -234,7 +235,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:text="@string/explorer"
+                android:text="@string/history"
                 android:textSize="11sp"
                 android:textColor="@color/white" />
         </LinearLayout>

@@ -198,7 +198,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, WishlistActivity::class.java))
         }
 
-        // Search функција
+        binding.historyBtn?.setOnClickListener {
+            startActivity(Intent(this, HistoryActivity::class.java))
+        }
         binding.searchEdt?.setOnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER &&
                 event.action == KeyEvent.ACTION_DOWN) {
@@ -212,14 +214,12 @@ class MainActivity : AppCompatActivity() {
             } else false
         }
 
-        // See All функција
         binding.textSeeAll.setOnClickListener {
             val intent = Intent(this, SearchActivity::class.java)
             intent.putExtra("show_all", true)
             startActivity(intent)
         }
 
-        // Filter копче
         binding.filterBtn?.setOnClickListener {
             val query = binding.searchEdt?.text.toString().trim()
             if (query.isNotEmpty()) {
