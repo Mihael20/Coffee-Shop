@@ -178,15 +178,15 @@ class MainActivity : AppCompatActivity() {
 
         binding.bellBtn.setOnClickListener {
             android.app.AlertDialog.Builder(this)
-                .setTitle("Coffee Shop ☕")
-                .setMessage("Нова промоција! Купи едно добиј едно бесплатно!")
+                .setTitle(getString(R.string.coffee_shop_promo_title))
+                .setMessage(getString(R.string.coffee_shop_promo_message))
                 .setPositiveButton("OK", null)
                 .show()
 
             showNotification(
-                id = 1,
-                title = "Coffee Shop",
-                message = "Нова промоција! Купи едно добиј едно бесплатно! ☕"
+                id = 2,
+                title = getString(R.string.coffee_shop_promo_title),
+                message = getString(R.string.welcome_message)
             )
         }
 

@@ -78,8 +78,9 @@
     <string name="continue_as_guest">Continue as Guest</string>
     <string name="guest">Guest</string>
     <string name="anonymous_user">Anonymous User</string>
-
-
+    <string name="coffee_shop_promo_title">Coffee Shop ☕</string>
+    <string name="coffee_shop_promo_message">New promotion! Buy one get one for free!</string>
+    <string name="welcome_message">Welcome! Check out our new offers! ☕</string>
 
 
 </resources>

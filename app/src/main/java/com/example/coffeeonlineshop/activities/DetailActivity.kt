@@ -55,16 +55,21 @@ class DetailActivity : AppCompatActivity() {
                 .load(item.picUrl[0])
                 .into(binding.picMain)
 
-            titleTxt.text = item.title
             priceTxt.text = "$" + item.price
             ratingTxt.text = item.rating.toString()
 
             val lang = resources.configuration.locales[0].language
             if (lang == "mk") {
+                titleTxt.text = "..."
+                translateText(item.title) { translated ->
+                    titleTxt.text = translated
+                }
+                descriptionTxt.text = "..."
                 translateText(item.description) { translated ->
                     descriptionTxt.text = translated
                 }
             } else {
+                titleTxt.text = item.title
                 descriptionTxt.text = item.description
             }
 
