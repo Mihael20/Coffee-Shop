@@ -9,7 +9,7 @@ import com.example.coffeeonlineshop.Helper.ManagmentCart
 import com.example.coffeeonlineshop.Repository.OrderRepository
 import com.example.coffeeonlineshop.adapters.CartAdapter
 import com.example.coffeeonlineshop.databinding.ActivityCartBinding
-
+import com.example.coffeeonlineshop.R
 class CartActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCartBinding
@@ -58,8 +58,8 @@ class CartActivity : AppCompatActivity() {
                 totalPrice = managmentCart.getTotalFee()
             )
             android.app.AlertDialog.Builder(this)
-                .setTitle("Order Placed! ☕")
-                .setMessage("Your order has been placed successfully!")
+                .setTitle(getString(R.string.order_placed_title))
+                .setMessage(getString(R.string.order_placed_message))
                 .setPositiveButton("OK") { _, _ ->
                     finish()
                 }

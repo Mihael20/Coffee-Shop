@@ -50,7 +50,17 @@ class SearchActivity : AppCompatActivity() {
         } else if (query.isNotEmpty()) {
             binding.searchResultTitle.text = "${getString(R.string.results_for)}$query"
             binding.historyLayout.visibility = View.GONE
-            search(query)
+
+            val lang = resources.configuration.locales[0].language
+            if (lang == "mk") {
+                binding.progressBar.visibility = View.VISIBLE
+                translateToEnglish(query) { englishQuery ->
+                    binding.progressBar.visibility = View.GONE
+                    search(englishQuery)
+                }
+            } else {
+                search(query)
+            }
         } else {
             binding.searchResultTitle.text = getString(R.string.recent_searches)
             showHistory()
@@ -88,7 +98,17 @@ class SearchActivity : AppCompatActivity() {
                 binding.searchResultTitle.text = "${getString(R.string.results_for)}$selected"
                 binding.historyLayout.visibility = View.GONE
                 binding.clearHistoryBtn.visibility = View.GONE
-                search(selected)
+
+                val lang = resources.configuration.locales[0].language
+                if (lang == "mk") {
+                    binding.progressBar.visibility = View.VISIBLE
+                    translateToEnglish(selected) { englishQuery ->
+                        binding.progressBar.visibility = View.GONE
+                        search(englishQuery)
+                    }
+                } else {
+                    search(selected)
+                }
             }
         }
     }
@@ -127,6 +147,33 @@ class SearchActivity : AppCompatActivity() {
                 binding.resultView.adapter = PopularAdapter(items = filtered)
             }
         }
+    }
+
+    private fun translateToEnglish(text: String, callback: (String) -> Unit) {
+        Thread {
+            try {
+                val encoded = java.net.URLEncoder.encode(text, "UTF-8")
+                val url = java.net.URL("https://api.mymemory.translated.net/get?q=$encoded&langpair=mk|en")
+                val connection = url.openConnection() as java.net.HttpURLConnection
+                connection.requestMethod = "GET"
+                connection.connectTimeout = 5000
+                connection.readTimeout = 5000
+
+                val response = connection.inputStream.bufferedReader().readText()
+                val json = org.json.JSONObject(response)
+                val translated = json
+                    .getJSONObject("responseData")
+                    .getString("translatedText")
+
+                runOnUiThread {
+                    callback(translated)
+                }
+            } catch (e: Exception) {
+                runOnUiThread {
+                    callback(text)
+                }
+            }
+        }.start()
     }
 
     inner class HistoryAdapter(

@@ -115,12 +115,12 @@ class ProfileActivity : AppCompatActivity() {
 
             logoutBtn.setOnClickListener {
                 AlertDialog.Builder(this@ProfileActivity)
-                    .setTitle("Logout")
-                    .setMessage("Are you sure you want to logout?")
-                    .setPositiveButton("Yes") { _, _ ->
+                    .setTitle(getString(R.string.logout))
+                    .setMessage(getString(R.string.logout_confirm))
+                    .setPositiveButton(getString(R.string.yes)) { _, _ ->
                         goToLogin()
                     }
-                    .setNegativeButton("No", null)
+                    .setNegativeButton(getString(R.string.no), null)
                     .show()
             }
 

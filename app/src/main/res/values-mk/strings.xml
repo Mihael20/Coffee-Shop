@@ -80,4 +80,7 @@
     <string name="coffee_shop_promo_title">Coffee Shop ☕</string>
     <string name="coffee_shop_promo_message">Нова промоција! Купи едно добиј едно бесплатно!</string>
     <string name="welcome_message">Добредојде! Погледни ги нашите нови понуди! ☕</string>
+    <string name="order_placed_title">Нарачката е направена! ☕</string>
+    <string name="order_placed_message">Вашата нарачка е успешно направена!</string>
+    <string name="logout_confirm">Дали сте сигурни дека сакате да се одјавите?</string>
 </resources>

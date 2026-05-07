@@ -81,6 +81,8 @@
     <string name="coffee_shop_promo_title">Coffee Shop ☕</string>
     <string name="coffee_shop_promo_message">New promotion! Buy one get one for free!</string>
     <string name="welcome_message">Welcome! Check out our new offers! ☕</string>
-
+    <string name="order_placed_title">Order Placed! ☕</string>
+    <string name="order_placed_message">Your order has been placed successfully!</string>
+    <string name="logout_confirm">Are you sure you want to logout?</string>
 
 </resources>
