@@ -39,4 +39,44 @@
     <string name="delete_account">Избриши акаунт</string>
     <string name="name">Ime</string>
     <string name="logout">Одјави се</string>
+    <string name="subtotal">Вкупно без достава</string>
+    <string name="clear_all">🗑 Избриши сè</string>
+    <string name="no_favourites">Нема омилени уште ❤️</string>
+    <string name="results_for">Резултати за: </string>
+    <string name="all_coffees">Сите Кафиња</string>
+    <string name="recent_searches">Последни Пребарувања</string>
+    <string name="clear_history">🗑 Избриши Историја</string>
+    <string name="no_results">Нема резултати ☕</string>
+    <string name="history_cleared">Историјата е избришана ✓</string>
+    <string name="no_recent_searches">Нема последни пребарувања</string>
+    <string name="my_orders">Мои Нарачки</string>
+    <string name="select_all">Избери Сите</string>
+    <string name="delete_selected">Избриши Избрани</string>
+    <string name="delete_all">Избриши Сè</string>
+    <string name="approve">✓ Одобри</string>
+    <string name="cancel_order">✗ Откажи</string>
+    <string name="status">Статус: </string>
+    <string name="total_price">Вкупно: </string>
+    <string name="date">Датум: </string>
+    <string name="no_orders">Нема нарачки уште! ☕</string>
+    <string name="delete_selected_confirm">Дали сте сигурни дека сакате да ги избришете избраните нарачки?</string>
+    <string name="delete_all_confirm">Дали сте сигурни дека сакате да ги избришете сите нарачки?</string>
+    <string name="cancel_order_confirm">Дали сте сигурни дека сакате да ја откажете нарачката?</string>
+    <string name="yes">Да</string>
+    <string name="no">Не</string>
+    <string name="status_approved">одобрено</string>
+    <string name="status_canceled">откажано</string>
+    <string name="status_pending">во тек</string>
+    <string name="sign_in_to_continue">Најавете се за да продолжите</string>
+    <string name="email">Е-пошта</string>
+    <string name="password">Лозинка</string>
+    <string name="login">Најава</string>
+    <string name="register">Регистрирај се</string>
+    <string name="continue_with_google">Продолжи со Google</string>
+    <string name="continue_with_facebook">Продолжи со Facebook</string>
+    <string name="continue_as_guest">Продолжи како гостин</string>
+    <string name="guest">Гостин</string>
+    <string name="anonymous_user">Анонимен корисник</string>
+
+
 </resources>

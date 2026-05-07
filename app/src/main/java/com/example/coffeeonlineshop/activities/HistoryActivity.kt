@@ -50,19 +50,19 @@ class HistoryActivity : AppCompatActivity() {
             val selected = orderAdapter?.getSelectedIds() ?: return@setOnClickListener
             if (selected.isEmpty()) return@setOnClickListener
             AlertDialog.Builder(this)
-                .setTitle("Delete Selected")
-                .setMessage("Are you sure?")
-                .setPositiveButton("Yes") { _, _ -> deleteOrders(selected) }
-                .setNegativeButton("No", null)
+                .setTitle(getString(R.string.delete_selected))
+                .setMessage(getString(R.string.delete_selected_confirm))
+                .setPositiveButton(getString(R.string.yes)) { _, _ -> deleteOrders(selected) }
+                .setNegativeButton(getString(R.string.no), null)
                 .show()
         }
 
         deleteAllBtn.setOnClickListener {
             AlertDialog.Builder(this)
-                .setTitle("Delete All")
-                .setMessage("Are you sure?")
-                .setPositiveButton("Yes") { _, _ -> deleteOrders(orderIds.toList()) }
-                .setNegativeButton("No", null)
+                .setTitle(getString(R.string.delete_all))
+                .setMessage(getString(R.string.delete_all_confirm))
+                .setPositiveButton(getString(R.string.yes)) { _, _ -> deleteOrders(orderIds.toList()) }
+                .setNegativeButton(getString(R.string.no), null)
                 .show()
         }
 
@@ -143,24 +143,28 @@ class HistoryActivity : AppCompatActivity() {
             val order = orders[position]
             val id = ids[position]
 
-            holder.totalTxt.text = "Total: $${order["totalPrice"]}"
+            holder.totalTxt.text = "${getString(R.string.total_price)}$${order["totalPrice"]}"
 
             val status = order["status"] as? String ?: "pending"
-            holder.statusTxt.text = "Status: $status"
+            val statusMk = when (status) {
+                "approved" -> getString(R.string.status_approved)
+                "canceled" -> getString(R.string.status_canceled)
+                else -> getString(R.string.status_pending)
+            }
+            holder.statusTxt.text = "${getString(R.string.status)}$statusMk"
 
             when (status) {
                 "approved" -> holder.statusTxt.setTextColor(
                     android.graphics.Color.parseColor("#4CAF50"))
                 "canceled" -> holder.statusTxt.setTextColor(
                     android.graphics.Color.parseColor("#F44336"))
-                else -> holder.statusTxt.setTextColor(
-                    android.graphics.Color.WHITE)
+                else -> holder.statusTxt.setTextColor(android.graphics.Color.WHITE)
             }
 
             val timestamp = order["timestamp"] as? Timestamp
             if (timestamp != null) {
                 val sdf = SimpleDateFormat("dd MMM yyyy, HH:mm", Locale.getDefault())
-                holder.dateTxt.text = "Date: ${sdf.format(timestamp.toDate())}"
+                holder.dateTxt.text = "${getString(R.string.date)}${sdf.format(timestamp.toDate())}"
             } else {
                 holder.dateTxt.text = ""
             }

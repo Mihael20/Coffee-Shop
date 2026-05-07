@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
-        android:text="Select All"
+        android:text="@string/select_all"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:background="@drawable/brown_2_full_corner"
@@ -52,7 +52,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Delete Selected"
+        android:layout_marginStart="8dp"
+        android:text="@string/delete_selected"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:background="@drawable/brown_full_corner_bg"
@@ -60,8 +61,7 @@
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/backBtn"
         app:layout_constraintStart_toEndOf="@id/selectAllBtn"
-        app:layout_constraintEnd_toStartOf="@id/deleteAllBtn"
-        android:layout_marginStart="8dp"/>
+        app:layout_constraintEnd_toStartOf="@id/deleteAllBtn"/>
 
     <TextView
         android:id="@+id/deleteAllBtn"
@@ -69,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Delete All"
+        android:text="@string/delete_all"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:background="@drawable/brown_full_corner_bg"
@@ -82,7 +82,7 @@
         android:id="@+id/emptyTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No history yet! ☕"
+        android:text="@string/no_orders"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:visibility="gone"

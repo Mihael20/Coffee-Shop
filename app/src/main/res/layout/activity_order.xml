@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="@color/darkBrown">
 
-    <!-- Back Button -->
     <ImageView
         android:id="@+id/backBtn"
         android:layout_width="40dp"
@@ -20,12 +19,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <!-- Title -->
     <TextView
         android:id="@+id/titleTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="My Orders"
+        android:text="@string/my_orders"
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -34,14 +32,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Select All Button -->
     <TextView
         android:id="@+id/selectAllBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
-        android:text="Select All"
+        android:text="@string/select_all"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:background="@drawable/brown_2_full_corner"
@@ -50,13 +47,13 @@
         app:layout_constraintTop_toBottomOf="@id/backBtn"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <!-- Delete Selected Button -->
     <TextView
         android:id="@+id/deleteSelectedBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Delete Selected"
+        android:layout_marginStart="8dp"
+        android:text="@string/delete_selected"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:background="@drawable/brown_full_corner_bg"
@@ -64,17 +61,15 @@
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/backBtn"
         app:layout_constraintStart_toEndOf="@id/selectAllBtn"
-        app:layout_constraintEnd_toStartOf="@id/deleteAllBtn"
-        android:layout_marginStart="8dp"/>
+        app:layout_constraintEnd_toStartOf="@id/deleteAllBtn"/>
 
-    <!-- Delete All Button -->
     <TextView
         android:id="@+id/deleteAllBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:text="Delete All"
+        android:text="@string/delete_all"
         android:textColor="@color/white"
         android:textSize="14sp"
         android:background="@drawable/brown_full_corner_bg"
@@ -83,12 +78,11 @@
         app:layout_constraintTop_toBottomOf="@id/backBtn"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Empty State -->
     <TextView
         android:id="@+id/emptyTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No orders yet! ☕"
+        android:text="@string/no_orders"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:visibility="gone"
@@ -97,7 +91,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Orders List -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/orderRecyclerView"
         android:layout_width="0dp"

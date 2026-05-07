@@ -127,10 +127,10 @@ class MainActivity : AppCompatActivity() {
         val user = FirebaseAuth.getInstance().currentUser ?: return
 
         val name = when {
-            user.isAnonymous -> "Guest"
+            user.isAnonymous -> getString(R.string.guest)
             !user.displayName.isNullOrEmpty() -> user.displayName!!
             !user.email.isNullOrEmpty() -> user.email!!.substringBefore("@")
-            else -> "User"
+            else -> getString(R.string.guest)
         }
         binding.userNameTxt.text = name
 

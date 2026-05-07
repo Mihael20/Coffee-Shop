@@ -42,8 +42,8 @@ class ProfileActivity : AppCompatActivity() {
             if (user != null) {
                 when {
                     user.isAnonymous -> {
-                        nameTxt.text = "Guest"
-                        emailTxt.text = "Anonymous User"
+                        nameTxt.text = getString(R.string.guest)
+                        emailTxt.text = getString(R.string.anonymous_user)
                         Glide.with(this@ProfileActivity)
                             .load(R.drawable.profile)
                             .transform(CircleCrop())

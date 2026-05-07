@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.coffeeonlineshop.R
 import com.example.coffeeonlineshop.adapters.PopularAdapter
 import com.example.coffeeonlineshop.databinding.ActivitySearchBinding
 import com.example.coffeeonlineshop.viewmodel.MainViewModel
@@ -29,31 +30,29 @@ class SearchActivity : AppCompatActivity() {
 
         binding.backBtn.setOnClickListener { finish() }
 
-        // Зачувај во историја
         if (query.isNotEmpty()) {
             saveToHistory(query)
         }
 
-        // Избриши историја — секогаш видливо
         binding.clearHistoryBtn.setOnClickListener {
             clearHistory()
             binding.historyLayout.visibility = View.GONE
             binding.resultView.visibility = View.GONE
             binding.emptyTxt.visibility = View.VISIBLE
-            binding.emptyTxt.text = "History cleared ✓"
-            binding.searchResultTitle.text = "Recent Searches"
+            binding.emptyTxt.text = getString(R.string.history_cleared)
+            binding.searchResultTitle.text = getString(R.string.recent_searches)
         }
 
         if (showAll) {
-            binding.searchResultTitle.text = "All Coffees"
+            binding.searchResultTitle.text = getString(R.string.all_coffees)
             binding.historyLayout.visibility = View.GONE
             loadAll()
         } else if (query.isNotEmpty()) {
-            binding.searchResultTitle.text = "Results for: $query"
+            binding.searchResultTitle.text = "${getString(R.string.results_for)}$query"
             binding.historyLayout.visibility = View.GONE
             search(query)
         } else {
-            binding.searchResultTitle.text = "Recent Searches"
+            binding.searchResultTitle.text = getString(R.string.recent_searches)
             showHistory()
         }
     }
@@ -80,13 +79,13 @@ class SearchActivity : AppCompatActivity() {
         if (history.isEmpty()) {
             binding.historyLayout.visibility = View.GONE
             binding.emptyTxt.visibility = View.VISIBLE
-            binding.emptyTxt.text = "No recent searches"
+            binding.emptyTxt.text = getString(R.string.no_recent_searches)
         } else {
             binding.emptyTxt.visibility = View.GONE
             binding.historyLayout.visibility = View.VISIBLE
             binding.historyRecycler.layoutManager = LinearLayoutManager(this)
             binding.historyRecycler.adapter = HistoryAdapter(history) { selected ->
-                binding.searchResultTitle.text = "Results for: $selected"
+                binding.searchResultTitle.text = "${getString(R.string.results_for)}$selected"
                 binding.historyLayout.visibility = View.GONE
                 binding.clearHistoryBtn.visibility = View.GONE
                 search(selected)
@@ -143,7 +142,7 @@ class SearchActivity : AppCompatActivity() {
             val view = LayoutInflater.from(parent.context)
                 .inflate(android.R.layout.simple_list_item_1, parent, false)
             view.findViewById<TextView>(android.R.id.text1).setTextColor(
-                resources.getColor(com.example.coffeeonlineshop.R.color.white, null)
+                resources.getColor(R.color.white, null)
             )
             return ViewHolder(view)
         }

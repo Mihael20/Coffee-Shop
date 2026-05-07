@@ -56,14 +56,20 @@ class DetailActivity : AppCompatActivity() {
                 .into(binding.picMain)
 
             titleTxt.text = item.title
-            descriptionTxt.text = item.description
             priceTxt.text = "$" + item.price
             ratingTxt.text = item.rating.toString()
 
-            // Постави срце според wishlist статус
+            val lang = resources.configuration.locales[0].language
+            if (lang == "mk") {
+                translateText(item.description) { translated ->
+                    descriptionTxt.text = translated
+                }
+            } else {
+                descriptionTxt.text = item.description
+            }
+
             updateWishlistIcon()
 
-            // Срце копче
             favBtn.setOnClickListener {
                 val added = WishlistActivity.toggleWishlist(this@DetailActivity, item)
                 updateWishlistIcon()
@@ -103,6 +109,33 @@ class DetailActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    private fun translateText(text: String, callback: (String) -> Unit) {
+        Thread {
+            try {
+                val encoded = java.net.URLEncoder.encode(text, "UTF-8")
+                val url = java.net.URL("https://api.mymemory.translated.net/get?q=$encoded&langpair=en|mk")
+                val connection = url.openConnection() as java.net.HttpURLConnection
+                connection.requestMethod = "GET"
+                connection.connectTimeout = 5000
+                connection.readTimeout = 5000
+
+                val response = connection.inputStream.bufferedReader().readText()
+                val json = org.json.JSONObject(response)
+                val translated = json
+                    .getJSONObject("responseData")
+                    .getString("translatedText")
+
+                runOnUiThread {
+                    callback(translated)
+                }
+            } catch (e: Exception) {
+                runOnUiThread {
+                    callback(text)
+                }
+            }
+        }.start()
     }
 
     private fun updateWishlistIcon() {

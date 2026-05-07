@@ -40,5 +40,46 @@
     <string name="delete_account">Delete Account</string>
     <string name="name">Name</string>
     <string name="logout">Logout</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="clear_all">🗑 Clear All</string>
+    <string name="no_favourites">No favourites yet ❤️</string>
+    <string name="results_for">Results for: </string>
+    <string name="all_coffees">All Coffees</string>
+    <string name="recent_searches">Recent Searches</string>
+    <string name="clear_history">🗑 Clear History</string>
+    <string name="no_results">No results found ☕</string>
+    <string name="history_cleared">History cleared ✓</string>
+    <string name="no_recent_searches">No recent searches</string>
+    <string name="my_orders">My Orders</string>
+    <string name="select_all">Select All</string>
+    <string name="delete_selected">Delete Selected</string>
+    <string name="delete_all">Delete All</string>
+    <string name="approve">✓ Approve</string>
+    <string name="cancel_order">✗ Cancel</string>
+    <string name="status">Status: </string>
+    <string name="total_price">Total: </string>
+    <string name="date">Date: </string>
+    <string name="no_orders">No orders yet! ☕</string>
+    <string name="delete_selected_confirm">Are you sure you want to delete selected orders?</string>
+    <string name="delete_all_confirm">Are you sure you want to delete all orders?</string>
+    <string name="cancel_order_confirm">Are you sure you want to cancel this order?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="status_approved">approved</string>
+    <string name="status_canceled">canceled</string>
+    <string name="status_pending">pending</string>
+    <string name="sign_in_to_continue">Sign in to continue</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="continue_with_facebook">Continue with Facebook</string>
+    <string name="continue_as_guest">Continue as Guest</string>
+    <string name="guest">Guest</string>
+    <string name="anonymous_user">Anonymous User</string>
+
+
+
 
 </resources>
