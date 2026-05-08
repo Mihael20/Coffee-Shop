@@ -115,7 +115,7 @@ class SearchActivity : AppCompatActivity() {
 
     private fun loadAll() {
         binding.progressBar.visibility = View.VISIBLE
-        viewModel.loadPopular().observeForever { items ->
+        viewModel.loadPopular().observe(this) { items ->
             binding.progressBar.visibility = View.GONE
             if (items.isEmpty()) {
                 binding.emptyTxt.visibility = View.VISIBLE
@@ -131,7 +131,7 @@ class SearchActivity : AppCompatActivity() {
 
     private fun search(query: String) {
         binding.progressBar.visibility = View.VISIBLE
-        viewModel.loadPopular().observeForever { items ->
+        viewModel.loadPopular().observe(this) { items ->
             binding.progressBar.visibility = View.GONE
             val filtered = items.filter {
                 it.title.contains(query, ignoreCase = true) ||
@@ -139,6 +139,7 @@ class SearchActivity : AppCompatActivity() {
             }.toMutableList()
             if (filtered.isEmpty()) {
                 binding.emptyTxt.visibility = View.VISIBLE
+                binding.emptyTxt.text = getString(R.string.no_results)
                 binding.resultView.visibility = View.GONE
             } else {
                 binding.emptyTxt.visibility = View.GONE
@@ -150,6 +151,37 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun translateToEnglish(text: String, callback: (String) -> Unit) {
+        val coffeeDict = mapOf(
+            "капучино" to "Cappuccino",
+            "капочино" to "Cappuccino",
+            "еспресо" to "Espresso",
+            "еспрессо" to "Espresso",
+            "лате" to "Latte",
+            "американо" to "Americano",
+            "топла чоколада" to "Hot Chocolate",
+            "чоколада" to "Chocolate",
+            "матча" to "Matcha",
+            "макијато" to "Macchiato",
+            "кортадо" to "Cortado",
+            "карамел" to "Caramel",
+            "лешник" to "Hazelnut",
+            "ванила" to "Vanilla",
+            "класично" to "Classic",
+            "темна" to "Dark",
+            "бела" to "White",
+            "шлаг" to "Whipped",
+            "ладно" to "Iced",
+            "уметност" to "Art"
+        )
+
+        val lowerText = text.lowercase()
+        for ((mk, en) in coffeeDict) {
+            if (lowerText.contains(mk)) {
+                callback(en)
+                return
+            }
+        }
+
         Thread {
             try {
                 val encoded = java.net.URLEncoder.encode(text, "UTF-8")
